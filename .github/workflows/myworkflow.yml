@@ -27,15 +27,9 @@ jobs:
           python setup.py sdist --formats=gztar
 
       - name: Upload to GCS
-        run: |
-          echo "Installing Google Cloud SDK..."
-          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-          sudo apt-get update && sudo apt-get install google-cloud-sdk
+        uses: google-github-actions/upload-cloud-storage@v0
+        with:
+          path: dist/my_training_package-0.2.tar.gz
+          destination: gs://mlops_task_us_central1
+          credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-          # Authenticate with GCP
-          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > "${HOME}/gcp-key.json"
-          gcloud auth activate-service-account --key-file="${HOME}/gcp-key.json"
-          #
-          # Copy tar file to GCS
-          gsutil cp dist/my_training_package-0.2.tar.gz gs://mlops_task_us_central1
