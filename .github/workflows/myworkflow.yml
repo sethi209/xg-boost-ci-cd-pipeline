@@ -37,10 +37,14 @@ jobs:
           path: dist/my_training_package-0.2.tar.gz
           destination: mlops_task_us_central1
 
-      - name: Run Hyperparameter Tuning
-        run: |
-          # Make sure to install the necessary dependencies for tuning
-          # pip install google-cloud-aiplatform  # Install Vertex AI SDK if not included in requirements.txt
+      # - name: Run Hyperparameter Tuning
+      #   run: |
+      #     # Make sure to install the necessary dependencies for tuning
+      #     # pip install google-cloud-aiplatform  # Install Vertex AI SDK if not included in requirements.txt
           
-          # Run your tuning script
-          python tuning.py
+      #     # Run your tuning script
+      #     python tuning.py
+
+      - name: Run Model Evaluation
+        run: |
+          python evaluation.py  # Run your evaluation script
