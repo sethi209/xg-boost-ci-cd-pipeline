@@ -36,6 +36,6 @@ jobs:
           # Authenticate with GCP
           echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > "${HOME}/gcp-key.json"
           gcloud auth activate-service-account --key-file="${HOME}/gcp-key.json"
-          
+          #
           # Copy tar file to GCS
           gsutil cp dist/my_training_package-0.2.tar.gz gs://mlops_task_us_central1
