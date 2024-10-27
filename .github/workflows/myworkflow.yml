@@ -48,3 +48,7 @@ jobs:
       - name: Run Model Evaluation
         run: |
           python evaluation.py  # Run your evaluation script
+
+      - name: Deploy Best Model
+        run: |
+          python deployment.py  # Run your deployment script
