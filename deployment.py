@@ -25,6 +25,7 @@ model = aiplatform.Model.upload(
 )
 
 # Create an endpoint for deployment
+#
 endpoint = aiplatform.Endpoint.create(display_name="xgboost_endpoint")
 
 # Deploy the model to the endpoint
