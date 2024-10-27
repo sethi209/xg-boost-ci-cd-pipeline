@@ -1,0 +1,42 @@
+name: Upload Training Package
+
+on:
+  push:
+    branches:
+      - main  # Adjust this if you're using a different branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Adjust to your Python version
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create package
+        run: |
+          python setup.py sdist --formats=gztar
+
+      - name: Upload to GCS
+        run: |
+          # Install Google Cloud SDK
+          curl https://sdk.cloud.google.com | bash
+          echo "source $HOME/google-cloud-sdk/path.bash.inc" >> $BASH_ENV
+          echo "source $HOME/google-cloud-sdk/completion.bash.inc" >> $BASH_ENV
+          source $BASH_ENV
+
+          # Authenticate with GCP
+          echo "${{ secrets.gcp-service-key }}" > "${HOME}/gcp-key.json"
+          gcloud auth activate-service-account --key-file="${HOME}/gcp-key.json"
+          
+          # Copy tar file to GCS
+          gsutil cp dist/my_training_package-0.2.tar.gz gs://mlops_task_us_central1
