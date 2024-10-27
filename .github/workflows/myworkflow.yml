@@ -43,4 +43,4 @@ jobs:
           # pip install google-cloud-aiplatform  # Install Vertex AI SDK if not included in requirements.txt
           
           # Run your tuning script
-          python my_training_package/tuning.py
+          python tuning.py
