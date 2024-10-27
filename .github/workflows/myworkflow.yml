@@ -28,11 +28,10 @@ jobs:
 
       - name: Upload to GCS
         run: |
-          # Install Google Cloud SDK
-          curl https://sdk.cloud.google.com | bash
-          echo "source $HOME/google-cloud-sdk/path.bash.inc" >> $BASH_ENV
-          echo "source $HOME/google-cloud-sdk/completion.bash.inc" >> $BASH_ENV
-          source $BASH_ENV
+          echo "Installing Google Cloud SDK..."
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+          sudo apt-get update && sudo apt-get install google-cloud-sdk
 
           # Authenticate with GCP
           echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > "${HOME}/gcp-key.json"
