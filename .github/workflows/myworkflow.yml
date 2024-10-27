@@ -35,7 +35,7 @@ jobs:
           source $BASH_ENV
 
           # Authenticate with GCP
-          echo "${{ secrets.gcp-service-key }}" > "${HOME}/gcp-key.json"
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > "${HOME}/gcp-key.json"
           gcloud auth activate-service-account --key-file="${HOME}/gcp-key.json"
           
           # Copy tar file to GCS
