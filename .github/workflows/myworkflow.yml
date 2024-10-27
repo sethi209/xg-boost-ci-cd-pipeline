@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Pre-run Tests
         run: |
-          python -m unittest discover tests -p 'test_pre_run.py'
+          python 'test_pre_run.py'
 
   build:
     runs-on: ubuntu-latest
