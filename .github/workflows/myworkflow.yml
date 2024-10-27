@@ -2,6 +2,11 @@ name: Upload Training Package
 
 on:
   push:
+    paths:
+      - 'tuning.py'
+      - 'evaluation.py'
+      - 'deployment.py'
+      - 'my_training_package/**' 
     branches:
       - main  # Adjust this if you're using a different branch
 
