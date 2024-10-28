@@ -13,20 +13,8 @@ from xgboost import XGBRegressor
 from sklearn.metrics import mean_squared_error
 from google.cloud import storage
 import os
-# import logging
-# from pythonjsonlogger import jsonlogger
 
-# Set up logging configuration
-# def setup_logger():
-#     logger = logging.getLogger("XGBoost_Training")
-#     logger.setLevel(logging.INFO)
-#     logHandler = logging.StreamHandler()  # Logging to stdout
-#     formatter = jsonlogger.JsonFormatter()
-#     logHandler.setFormatter(formatter)
-#     logger.addHandler(logHandler)
-#     return logger
-
-# Upload file to Google Cloud Storage
+# Uploading file to Google Cloud Storage
 def upload_to_gcs(local_path, bucket_name, destination_blob_name):
     """Uploads a file to the GCS bucket."""
     client = storage.Client()
@@ -59,9 +47,6 @@ def train_xgboost_model(n_estimators, max_depth, learning_rate, subsample):
     # Evaluate on validation set
     y_pred = model.predict(X_val)
     mse = mean_squared_error(y_val, y_pred)
-    
-    # Log the MSE
-    # logger.info({"mean_squared_error": mse})
 
     # Save model locally
     local_model_path = f'model_{n_estimators}_{max_depth}_{learning_rate}_{subsample}.bst'
@@ -73,7 +58,7 @@ def train_xgboost_model(n_estimators, max_depth, learning_rate, subsample):
         f.write(f"Mean Squared Error: {mse}")
 
     # Define unique paths for each trial in GCS
-    bucket_name = 'mlops_task_us_central1'  # Replace with your GCS bucket name
+    bucket_name = 'mlops_task_us_central1'  
     gcs_model_path = f'model_artifacts/trial_{n_estimators}_{max_depth}_{learning_rate}_{subsample}/model.bst'
     gcs_mse_path = f'model_artifacts/trial_{n_estimators}_{max_depth}_{learning_rate}_{subsample}/mse.txt'
 
@@ -85,7 +70,7 @@ def train_xgboost_model(n_estimators, max_depth, learning_rate, subsample):
     os.remove(local_model_path)
     os.remove(mse_file_path)
 
-    # Return the MSE for logging
+    # Return the MSE 
     return mse
 
 if __name__ == '__main__':
@@ -99,10 +84,7 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
 
-#     # Set up the logger
-#     logger = setup_logger()
-
-    # Run training and log MSE
+    # Run training 
     mse = train_xgboost_model(
         n_estimators=args.n_estimators,
         max_depth=args.max_depth,
