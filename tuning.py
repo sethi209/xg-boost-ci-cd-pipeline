@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[9]:
-
-
 from google.cloud import aiplatform
 
 PROJECT_ID = "mlops-task-439307"
@@ -11,10 +8,6 @@ REGION = "us-central1"
 BUCKET_NAME = "mlops_task_us_central1"
 
 aiplatform.init(project=PROJECT_ID, location=REGION, staging_bucket="gs://mlops_task_us_central1")
-
-
-# In[11]:
-
 
 from google.cloud.aiplatform import hyperparameter_tuning as hpt
 from google.cloud.aiplatform import CustomPythonPackageTrainingJob, HyperparameterTuningJob, CustomJob
@@ -33,9 +26,8 @@ training_job = CustomPythonPackageTrainingJob(
     display_name="xgboost-hyperparameter-tuning",
     python_package_gcs_uri="gs://mlops_task/my_training_package.zip",
     python_module_name="my_training_package.train",
-    container_uri="us-docker.pkg.dev/vertex-ai/training/tf-cpu.2-11:latest",  # Supported Python image
+    container_uri="us-docker.pkg.dev/vertex-ai/training/tf-cpu.2-11:latest", 
 )
-
 
 worker_pool_spec = {
     "machine_spec": {
@@ -65,10 +57,3 @@ tuning_job = HyperparameterTuningJob(
 
 # Run the tuning job
 tuning_job.run(sync=True)
-
-
-# In[ ]:
-
-
-
-
