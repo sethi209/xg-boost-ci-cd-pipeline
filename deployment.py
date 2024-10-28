@@ -3,7 +3,6 @@
 
 # In[1]:
 
-
 from google.cloud import aiplatform
 
 aiplatform.init(
@@ -11,10 +10,6 @@ aiplatform.init(
     location="us-central1",
     staging_bucket="gs://mlops_task_us_central1"
 )
-
-
-# In[2]:
-
 
 model = aiplatform.Model.upload(
     display_name="xgboost_model",
@@ -25,7 +20,6 @@ model = aiplatform.Model.upload(
 )
 
 # Create an endpoint for deployment
-#
 endpoint = aiplatform.Endpoint.create(display_name="xgboost_endpoint")
 
 # Deploy the model to the endpoint
@@ -37,8 +31,6 @@ model.deploy(
     max_replica_count=1
 )
 
-
-# In[ ]:
 
 
 
