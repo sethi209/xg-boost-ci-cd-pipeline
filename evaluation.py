@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 from google.cloud import storage
 import os
 
@@ -11,7 +8,6 @@ import os
 client = storage.Client()
 
 # Function to find the trial with the minimum MSE
-
 def find_best_model(bucket_name, base_path):
     bucket = client.bucket(bucket_name)
     blobs = bucket.list_blobs(prefix=base_path)
@@ -61,17 +57,12 @@ def save_best_model(bucket_name, best_model_path, destination_path='best_model/m
         print("No model found.")
 
 # Specify GCS bucket name and base path where trial artifacts are stored
-bucket_name = 'mlops_task_us_central1'  # Replace with your GCS bucket name
+bucket_name = 'mlops_task_us_central1'  
 base_path = 'model_artifacts/'  # Directory where trial results are saved
 
 # Find the best model and save it as model.bst in GCS
 best_model_path, min_mse = find_best_model(bucket_name, base_path)
 print(f"Best MSE: {min_mse} for model at {best_model_path}")
 save_best_model(bucket_name, best_model_path)
-
-
-# In[ ]:
-
-
 
 
