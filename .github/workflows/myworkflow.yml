@@ -71,6 +71,6 @@ jobs:
         run: |
           python evaluation.py  # Running evaluation script
 
-      # - name: Deploy Best Model
-      #   run: |
-      #     python deployment.py  # Running deployment script
+      - name: Deploy Best Model
+        run: |
+          python deployment.py  # Running deployment script
