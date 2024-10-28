@@ -22,13 +22,6 @@ parameter_spec = {
 
 metric_spec = {"mean_squared_error": "minimize"}
 
-# training_job = CustomPythonPackageTrainingJob(
-#     display_name="xgboost-hyperparameter-tuning",
-#     python_package_gcs_uri="gs://mlops_task/my_training_package.zip",
-#     python_module_name="my_training_package.train",
-#     container_uri="us-docker.pkg.dev/vertex-ai/training/tf-cpu.2-11:latest", 
-# )
-
 worker_pool_spec = {
     "machine_spec": {
         "machine_type": "n1-standard-4",
