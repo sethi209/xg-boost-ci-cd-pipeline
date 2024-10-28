@@ -51,7 +51,7 @@ tuning_job = HyperparameterTuningJob(
     custom_job=custom_job,
     metric_spec=metric_spec,
     parameter_spec=parameter_spec,
-    max_trial_count=2,  # Number of trials
+    max_trial_count=1,  # Number of trials
     parallel_trial_count=2,  # Parallel trials
 )
 
