@@ -3,8 +3,7 @@ import unittest
 import importlib
 
 # Configurations to validate
-GCP_BUCKET = "mlops_task_us_central1"  # Replace with the actual bucket name or import it from config if available
-
+GCP_BUCKET = "mlops_task_us_central1"  
 
 class TestFileIntegrity(unittest.TestCase):
 
@@ -20,9 +19,8 @@ class TestFileIntegrity(unittest.TestCase):
 class TestConfigParameters(unittest.TestCase):
     def test_hyperparameters_exist(self):
         """Test if hyperparameter values are set within a valid range."""
-        # Assuming you have default hyperparameter values in tuning.py or a config file
         hyperparams = {
-            "n_estimators": 100,  # Example: Replace with actual defaults
+            "n_estimators": 100,  
             "max_depth": 6,
             "learning_rate": 0.1,
             "subsample": 1
