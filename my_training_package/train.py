@@ -13,6 +13,7 @@ from xgboost import XGBRegressor
 from sklearn.metrics import mean_squared_error
 from google.cloud import storage
 import os
+import hypertune
 
 # Uploading file to Google Cloud Storage
 def upload_to_gcs(local_path, bucket_name, destination_blob_name):
@@ -48,6 +49,11 @@ def train_xgboost_model(n_estimators, max_depth, learning_rate, subsample):
     y_pred = model.predict(X_val)
     mse = mean_squared_error(y_val, y_pred)
 
+    hpt = hypertune.HyperTune()
+    hpt.report_hyperparameter_tuning_metric(
+        hyperparameter_metric_tag='mse',
+        metric_value=mse)
+    
     # Save model locally
     local_model_path = f'model_{n_estimators}_{max_depth}_{learning_rate}_{subsample}.bst'
     model.save_model(local_model_path)
