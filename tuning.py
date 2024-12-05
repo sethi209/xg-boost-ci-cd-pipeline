@@ -20,7 +20,7 @@ parameter_spec = {
     "subsample": hpt.DoubleParameterSpec(min=0.5, max=1.0, scale="linear"),
 }
 
-metric_spec = {"mean_squared_error": "minimize"}
+metric_spec = {"mse": "minimize"}
 
 worker_pool_spec = {
     "machine_spec": {
