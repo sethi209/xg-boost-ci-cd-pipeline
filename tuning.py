@@ -16,7 +16,7 @@ from google.cloud.aiplatform import CustomPythonPackageTrainingJob, Hyperparamet
 parameter_spec = {
     "n_estimators": hpt.IntegerParameterSpec(min=50, max=150, scale="linear"),
     "max_depth": hpt.IntegerParameterSpec(min=3, max=10, scale="linear"),
-    "learning_rate": hpt.DoubleParameterSpec(min=0.01, max=0.3, scale="linear"),
+    "learning_rate": hpt.DoubleParameterSpec(min=0.01, max=0.4, scale="linear"),
     "subsample": hpt.DoubleParameterSpec(min=0.5, max=1.0, scale="linear"),
 }
 
